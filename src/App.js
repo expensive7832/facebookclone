@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {lazy, Suspense} from 'react'
+import { FaFacebook } from 'react-icons/fa'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+const Landing = lazy(() => import("./Pages/Landing"))
+const Home = lazy(() => import("./Pages/Home"))
 
 function App() {
+
+  const login = false
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  <Suspense fallback={<FaFacebook size={32}
+  className="text-primary position-absolute top-50 start-50 translate-middle"/>}>
+     <BrowserRouter>
+     <Routes>
+     <Route path="/" element={login ? <Home/> : <Landing/>}/>
+   </Routes>
+   </BrowserRouter>
+  </Suspense>
+  )
 }
 
-export default App;
+export default App
